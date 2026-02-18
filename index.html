@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brahmani Challa</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --accent: #2a5298;
+    --light: #f7f8fa;
+    --border: #e0e4ec;
+    --text: #1a1a1a;
+    --muted: #555;
+  }
+  body {
+    font-family: 'Georgia', serif;
+    color: var(--text);
+    background: #fff;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 60px;
+  }
+  nav .logo { font-weight: bold; font-size: 15pt; color: var(--accent); }
+  nav ul { list-style: none; display: flex; gap: 30px; }
+  nav ul a {
+    text-decoration: none; color: var(--muted);
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 10pt; letter-spacing: 0.8px;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  nav ul a:hover, nav ul a.active { color: var(--accent); }
+
+  /* PAGE SECTIONS */
+  .page { display: none; max-width: 800px; margin: 0 auto; padding: 70px 24px; }
+  .page.active { display: block; }
+
+  h2 {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 10pt; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2px;
+    color: var(--accent); margin-bottom: 28px;
+  }
+
+  /* HOME */
+  #home { display: flex !important; gap: 48px; align-items: flex-start; padding-top: 80px; }
+  .avatar {
+    width: 130px; height: 130px; border-radius: 50%;
+    background: var(--light); border: 2px solid var(--border);
+    flex-shrink: 0; display: flex; align-items: center;
+    justify-content: center; font-size: 38pt;
+    color: var(--accent); font-family: 'Helvetica Neue', sans-serif; font-weight: 300;
+  }
+  .hero-text h1 { font-size: 22pt; font-weight: bold; margin-bottom: 4px; }
+  .hero-text .role { font-family: 'Helvetica Neue', sans-serif; font-size: 10.5pt; color: var(--muted); margin-bottom: 14px; }
+  .hero-text p { font-size: 10.5pt; color: #333; max-width: 540px; }
+  .btn-row { margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    font-family: 'Helvetica Neue', sans-serif; font-size: 9pt;
+    text-decoration: none; color: var(--accent);
+    border: 1px solid var(--accent); padding: 5px 14px;
+    border-radius: 3px; letter-spacing: 0.4px;
+    transition: all 0.2s; cursor: pointer; background: none;
+  }
+  .btn:hover { background: var(--accent); color: #fff; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+  .about-grid p { font-size: 10.5pt; color: #333; }
+  .about-grid h3 { font-size: 10pt; font-family: 'Helvetica Neue', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 10px; }
+  .about-full { font-size: 10.5pt; color: #333; margin-bottom: 20px; }
+  .interest-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .tag {
+    font-family: 'Helvetica Neue', sans-serif; font-size: 8.5pt;
+    background: #e3eaf7; color: var(--accent);
+    padding: 3px 11px; border-radius: 20px;
+  }
+
+  /* RESEARCH */
+  .research-card {
+    background: var(--light); border: 1px solid var(--border);
+    border-left: 3px solid var(--accent); border-radius: 4px;
+    padding: 20px 22px; margin-bottom: 16px;
+  }
+  .research-card h3 { font-size: 11pt; font-weight: bold; margin-bottom: 6px; }
+  .research-card p { font-size: 10pt; color: #444; }
+  .research-card .tags { margin-top: 10px; display: flex; gap: 7px; flex-wrap: wrap; }
+
+  /* CV */
+  .cv-section { margin-bottom: 32px; }
+  .cv-section h3 {
+    font-family: 'Helvetica Neue', sans-serif; font-size: 9.5pt;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 1.4px;
+    border-bottom: 1px solid var(--text); padding-bottom: 3px; margin-bottom: 14px;
+  }
+  .cv-entry { margin-bottom: 16px; }
+  .cv-row { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px; }
+  .cv-row .title { font-weight: bold; font-size: 10.5pt; }
+  .cv-row .date { font-family: 'Helvetica Neue', sans-serif; font-size: 9pt; color: var(--muted); }
+  .cv-entry .sub { font-style: italic; font-size: 10pt; color: var(--muted); margin-bottom: 4px; }
+  .cv-entry ul { padding-left: 18px; }
+  .cv-entry ul li { font-size: 10pt; margin-bottom: 3px; }
+  .skills-line { font-size: 10pt; margin-bottom: 4px; }
+  .skills-line b { font-weight: 700; }
+  .honor-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 10pt; gap: 12px; }
+  .honor-row:last-child { border-bottom: none; }
+  .honor-row .yr { font-family: 'Helvetica Neue', sans-serif; font-size: 9pt; color: var(--muted); white-space: nowrap; }
+  .cv-download {
+    display: inline-block; margin-bottom: 28px;
+    font-family: 'Helvetica Neue', sans-serif; font-size: 9pt;
+    color: var(--accent); border: 1px solid var(--accent);
+    padding: 6px 16px; border-radius: 3px; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .cv-download:hover { background: var(--accent); color: #fff; }
+
+  footer {
+    text-align: center; padding: 24px;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 8.5pt; color: #aaa;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">BC</div>
+  <ul>
+    <li><a href="#" class="nav-link active" data-target="home">Home</a></li>
+    <li><a href="#" class="nav-link" data-target="about">About</a></li>
+    <li><a href="#" class="nav-link" data-target="research">Research</a></li>
+    <li><a href="#" class="nav-link" data-target="cv">CV</a></li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<div class="page active" id="home">
+  <div class="avatar">BC</div>
+  <div class="hero-text">
+    <h1>Brahmani Challa</h1>
+    <div class="role">Ph.D. Researcher · Electrical & Computer Engineering · UW–Madison</div>
+    <p>I work on ultra-wide bandgap semiconductor devices, focusing on AlGaN-channel HEMTs grown by MOCVD for next-generation power electronics. My research bridges materials science, device physics, and nanofabrication.</p>
+    <div class="btn-row">
+      <button class="btn" data-target="about">About Me</button>
+      <button class="btn" data-target="research">Research</button>
+      <button class="btn" data-target="cv">CV</button>
+      <a class="btn" href="mailto:bchalla@wisc.edu">Email Me</a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="about">
+  <h2>About</h2>
+  <p class="about-full">
+    I am a Ph.D. student in Electrical and Computer Engineering at the University of Wisconsin–Madison, where I joined in August 2024. My research is focused on the growth and characterization of AlGaN-channel high electron mobility transistors (HEMTs) using Metal-Organic Chemical Vapor Deposition (MOCVD), targeting ultra-wide bandgap power electronics applications.
+  </p>
+  <p class="about-full">
+    I completed my B.Tech. in Electrical Engineering at the Indian Institute of Technology Ropar, India, where my thesis explored novel material and inverter architectures for future technology nodes, including 2D materials, CFET inverters, and CMOS design. Prior to my PhD, I interned at Texas Instruments in Bangalore, working on digital correction algorithms for analog-to-digital converters.
+  </p>
+  <p class="about-full">
+    Outside of research, I have been involved in cultural and creative communities — including serving as a coordinator for IIT Ropar's annual cultural festival and being an active member of the university's dramatics club.
+  </p>
+
+  <div class="about-grid">
+    <div>
+      <h3>Research Interests</h3>
+      <div class="interest-tags">
+        <span class="tag">Ultra-wide bandgap semiconductors</span>
+        <span class="tag">AlGaN/GaN HEMTs</span>
+        <span class="tag">MOCVD epitaxy</span>
+        <span class="tag">Ohmic contact engineering</span>
+        <span class="tag">TCAD simulation</span>
+        <span class="tag">Power electronics</span>
+      </div>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <p style="font-size:10pt;">
+        📧 <a href="mailto:bchalla@wisc.edu" style="color:var(--accent);">bchalla@wisc.edu</a><br>
+        📞 +1 (224) 598-8019<br>
+        🌐 <a href="https://brahmanichalla.github.io/" target="_blank" style="color:var(--accent);">brahmanichalla.github.io</a><br>
+        📍 Madison, Wisconsin, US
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- RESEARCH -->
+<div class="page" id="research">
+  <h2>Research</h2>
+
+  <div class="research-card">
+    <h3>AlGaN-Channel HEMTs for Ultra-Wide Bandgap Power Electronics</h3>
+    <p>Developing AlGaN-channel HEMTs (&lt;50% Al) via MOCVD for high-voltage, high-frequency power switching. Focus areas include epitaxial growth optimization, device architecture design, and breakdown voltage characterization.</p>
+    <div class="tags">
+      <span class="tag">MOCVD</span><span class="tag">AlGaN/GaN</span><span class="tag">UWBG</span><span class="tag">Power Electronics</span>
+    </div>
+  </div>
+
+  <div class="research-card">
+    <h3>Selective Regrown n-AlGaN Ohmic Contacts</h3>
+    <p>Designed reverse-graded n-AlGaN ohmic contacts via selective regrowth, achieving low contact resistance critical for high-performance HEMT operation. Includes process development and TLM-based electrical characterization.</p>
+    <div class="tags">
+      <span class="tag">Ohmic Contacts</span><span class="tag">Selective Regrowth</span><span class="tag">TLM</span><span class="tag">Contact Resistance</span>
+    </div>
+  </div>
+
+  <div class="research-card">
+    <h3>TCAD Simulation & Device Characterization</h3>
+    <p>Sentaurus TCAD simulations to analyze breakdown voltage and electric field distribution in AlGaN-channel devices, complemented by Hall effect, HRXRD, AFM, and I-V measurements.</p>
+    <div class="tags">
+      <span class="tag">Sentaurus TCAD</span><span class="tag">HRXRD</span><span class="tag">AFM</span><span class="tag">Hall Effect</span><span class="tag">I-V</span>
+    </div>
+  </div>
+
+  <div class="research-card">
+    <h3>B.Tech. Thesis — Novel FET Architectures for Future Technology Nodes</h3>
+    <p>Investigated Si-based novel FETs, 2D materials for transistor channels, CMOS inverter design, and CFET inverter simulation at IIT Ropar. Presented CNN-based cataract detection prototype at IIT Ropar Science Day (Oct 2022).</p>
+    <div class="tags">
+      <span class="tag">2D Materials</span><span class="tag">CFET</span><span class="tag">CMOS</span><span class="tag">Device Simulation</span>
+    </div>
+  </div>
+</div>
+
+<!-- CV -->
+<div class="page" id="cv">
+  <h2>Curriculum Vitae</h2>
+  <a class="cv-download" href="mailto:bchalla@wisc.edu?subject=CV Request">Request Full CV</a>
+
+  <div class="cv-section">
+    <h3>Education</h3>
+    <div class="cv-entry">
+      <div class="cv-row"><span class="title">University of Wisconsin–Madison</span><span class="date">Aug 2024 – Present</span></div>
+      <div class="sub">Ph.D., Electrical and Computer Engineering &nbsp;|&nbsp; GPA: 4.0 / 4.0</div>
+    </div>
+    <div class="cv-entry">
+      <div class="cv-row"><span class="title">Indian Institute of Technology Ropar, India</span><span class="date">Aug 2019 – Jul 2023</span></div>
+      <div class="sub">B.Tech., Electrical Engineering &nbsp;|&nbsp; GPA: 7.91 / 10 (3.16 / 4.0)</div>
+      <ul><li>Thesis: <em>Novel Material and Inverter Architecture for Future Technology Nodes</em></li></ul>
+    </div>
+  </div>
+
+  <div class="cv-section">
+    <h3>Professional Experience</h3>
+    <div class="cv-entry">
+      <div class="cv-row"><span class="title">Texas Instruments — Engineering Intern</span><span class="date">May 2022 – Nov 2022</span></div>
+      <div class="sub">Analog Design Group, Bangalore, India</div>
+      <ul>
+        <li>Developed a digital post-distortion algorithm to suppress harmonics and IMD in an ADC pipeline.</li>
+        <li>Implemented and validated correction in GNU Octave using matrix formulation and signal processing.</li>
+        <li>Optimized ADC test setup and resolved system-level measurement errors.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cv-section">
+    <h3>Technical Skills</h3>
+    <div class="skills-line"><b>Simulation & EDA:</b> Sentaurus TCAD, Simulink, LTspice, PSpice, Ansoft HFSS, PSCAD, XCircuit, CircuitMaker</div>
+    <div class="skills-line"><b>Programming:</b> MATLAB, Python, GNU Octave, C</div>
+    <div class="skills-line"><b>Characterization:</b> TLM, Hall effect, HRXRD, AFM, I-V measurements, MOCVD growth</div>
+  </div>
+
+  <div class="cv-section">
+    <h3>Honors & Awards</h3>
+    <div class="honor-row"><span><strong>99.08 percentile</strong> in JEE Advanced (top national engineering entrance exam, India)</span><span class="yr">May 2019</span></div>
+    <div class="honor-row"><span><strong>National Scholarship</strong> for academic merit</span><span class="yr">May 2019</span></div>
+    <div class="honor-row"><span>Presented <strong>CNN-based Cataract Detection</strong> prototype at IIT Ropar Science Day</span><span class="yr">Oct 2022</span></div>
+    <div class="honor-row"><span><strong>Coordinator & Management Executive</strong>, Zeitgeist Cultural Fest, IIT Ropar</span><span class="yr">Oct 2019</span></div>
+    <div class="honor-row"><span>Member, <strong>Dramatics Club</strong> (Undekha), IIT Ropar</span><span class="yr">2019–2020</span></div>
+  </div>
+</div>
+
+<footer>© 2025 Brahmani Challa · University of Wisconsin–Madison</footer>
+
+<script>
+  const links = document.querySelectorAll('.nav-link, .btn[data-target]');
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = link.getAttribute('data-target');
+      if (!target) return;
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      document.getElementById(target).classList.add('active');
+      document.querySelector(`.nav-link[data-target="${target}"]`)?.classList.add('active');
+      window.scrollTo(0, 0);
+    });
+  });
+</script>
+</body>
+</html>
